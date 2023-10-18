@@ -21,12 +21,18 @@ export default function WebEditor() {
   const { editor, setEditor, theme, setTheme, tabornot, setTabornot, autorun, setAutorun } = useContext(SettingsContext)
 
 
-  useEffect(()=> {const timeout= setTimeout(() => {
+  useEffect(()=> {
+    if(autorun)
+{
+    const timeout= setTimeout(() => {
     setSrcDoc(`<html><style>${css}</style><body>${html}</body><script>${js}</script></html>`)
   }, 750);
 
   return ()=> clearTimeout(timeout);
+}
 },[html,css,js]);
+
+const runbtnstyle={position:'absolute',right:0,top:0, fontSize:'16px'};
 
 
 
@@ -77,7 +83,7 @@ export default function WebEditor() {
         }
           
 
-      <div className='pane'>
+      <div className='pane' style={{position:'relative'}}>
           <iframe 
           srcDoc={srcDoc}
           title='output' 
@@ -85,6 +91,7 @@ export default function WebEditor() {
           width='100%'
           height="100%"
           ></iframe>
+          {!autorun && <button onClick={()=>setSrcDoc(`<html><style>${css}</style><body>${html}</body><script>${js}</script></html>`)} style={runbtnstyle}> Run</button>}
       </div>
     </>
   )
