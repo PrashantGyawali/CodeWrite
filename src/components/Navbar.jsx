@@ -18,7 +18,7 @@ function NavComponent() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Container className="ml-auto">
-          <Nav variant="tabs" defaultActiveKey="link-1" data-bs-theme="dark">
+          <Nav variant="tabs" defaultActiveKey={editor=="webeditor"?"link-1":"link-2"} data-bs-theme="dark">
             <Container className="d-md-flex">
               <Nav.Item>
                 <Nav.Link eventKey="link-1" onClick={()=>setEditor('webeditor')}>Web Editor</Nav.Link>
