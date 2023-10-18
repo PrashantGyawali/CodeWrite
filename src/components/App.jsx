@@ -1,40 +1,26 @@
-import { useState, useEffect} from 'react'
-import Editor from './Editor'
+import { useState, createContext} from 'react'
+import WebEditor from './Webeditor';
+import MarkdownEditor from './Mdeditor';
 import '../App.css'
-import useLocalStorage from '../hooks/localstorage';
 
-function App() {
-  const [html, setHTML] = useLocalStorage('html',"");
-  const [css, setCss] = useLocalStorage('css',"");
-  const [js, setJs] = useLocalStorage('js',"");
-  const [srcDoc,setSrcDoc]=useState('');
+export const SettingsContext = createContext()
 
-  useEffect(()=> {const timeout= setTimeout(() => {
-    setSrcDoc(`<html><style>${css}</style><body>${html}</body><script>${js}</script></html>`)
-  }, 750);
+export default function App() {
 
-  return ()=> clearTimeout(timeout);
-},[html,css,js]);
+    const [editor, setEditor] = useState("webeditor");
+    const [theme, setTheme] = useState("material");
+    const [tabornot, setTabornot] = useState(false);
+    const [autorun, setAutorun] = useState(true);
 
 
   return (
     <>
-      <div className='pane top-pane'>
-          <Editor language="xml" displayname="HTML" value={html} onChange={setHTML} />
-          <Editor language="css" displayname="CSS" value={css} onChange={setCss}/>
-          <Editor language="javascript" displayname="JS" value={js} onChange={setJs} />
-      </div>
-      <div className='pane'>
-          <iframe 
-          srcDoc={srcDoc}
-          title='output' 
-          sandbox='allow-scripts'
-          width='100%'
-          height="100%"
-          ></iframe>
-      </div>
+    <SettingsContext.Provider value={{editor,setEditor,theme,setTheme,tabornot,setTabornot,autorun,setAutorun}}>
+        {editor=='webeditor' && <WebEditor/>}
+        {editor=='markdown' && <MarkdownEditor/>}
+    </SettingsContext.Provider>
     </>
   )
 }
 
-export default App
+

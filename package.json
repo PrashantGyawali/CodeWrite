@@ -20,9 +20,13 @@
     "vite": "^4.4.5"
   },
   "dependencies": {
+    "bootstrap": "^5.3.2",
     "codemirror": "^5.57.0",
     "react": "^17.0.2",
+    "react-bootstrap": "^2.9.0",
     "react-codemirror2": "^7.3.0",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-markdown": "^8.0.7",
+    "remark-gfm": "^3.0.1"
   }
 }

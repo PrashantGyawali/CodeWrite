@@ -8,15 +8,19 @@
   border-top-right-radius:.5rem;
 }
 
-.editor-title.javascript{
-  color: rgb(252, 246, 50);
+.javascript{
+  color: rgb(252, 246, 50) !important;
 }
-.editor-title.xml{
-  color: rgb(255, 93, 30);
+.xml{
+  color: rgb(255, 93, 30) !important;
 }
-.editor-title.css{
-color: rgb(41, 198, 255);
+.css{
+color: rgb(41, 198, 255) !important;
 }
+.markdown{
+  color: rgb(255, 93, 30) !important;
+}
+
 
 .editor-container{
   display: flex;
@@ -24,15 +28,23 @@ color: rgb(41, 198, 255);
   flex-grow: 1;
   flex-basis: 0;
   padding:.25rem;
+  background-color: rgb(30, 30, 30);
 }
 
 .CodeMirror{
   height:100% !important;
 }
 
+.h-90vh{
+  height: 90vh;
+  overflow-y: auto;
+}
+
 .pane{
   height:50vh;
   padding-bottom: .5rem;
+  background-color: rgb(30, 30, 30);
+
 }
 
 .code-mirror-wrapper{
@@ -44,7 +56,7 @@ color: rgb(41, 198, 255);
 
 .top-pane{
   display:flex;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 .editor-container.collapsed {
@@ -54,5 +66,41 @@ color: rgb(41, 198, 255);
 .editor-container.collapsed .CodeMirror-scroll{
   position:absolute;
   overflow: hidden !important;
-  
+}
+
+.nav.nav-tabs{
+  background-color: rgb(30, 30, 30);
+}
+
+.nav.nav-tabs .nav-link.active {
+  background-color:rgb(0, 0, 0);
+}
+
+.bg-body-tertiary
+{
+  padding:10px !important;
+}
+
+.navbar{
+  padding-bottom: 0px !important;
+}
+
+
+overflow-y-md-scroll {
+  overflow-y: auto; /* Default for screens <768px */
+}
+
+@media (min-width: 768px) {
+  overflow-y-md-scroll {
+    overflow-y: scroll; /* Applied for screens >=768px */
+  }
+}
+
+
+.min-height-300px{
+  min-height: 300px;
+}
+
+.accordion-body{
+  padding: 1px !important;
 }
