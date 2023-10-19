@@ -19,13 +19,13 @@ export default function MarkdownEditor(){
     return (
         <>
         <NavComponent/>
-        <div className="d-sm-flex overflow-y-md-scroll" >
+        <div className="d-sm-flex " >
 
             <div className="editor-container h-90vh">
             <Editor language="markdown" displayname="Markdown" value={markdown} onChange={setMarkdown} />
             </div>
 
-            <div className="editor-container min-height-300px">
+            <div className="editor-container min-height-300px h-sm-90vh">
             <MarkdownOutput markdown={markdown}/>
             </div>
         </div>

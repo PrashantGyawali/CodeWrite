@@ -40,6 +40,16 @@ color: rgb(41, 198, 255) !important;
   overflow-y: auto;
 }
 
+.h-sm-90vh{
+  height: auto;
+}
+@media (min-width: 576px) {
+  .h-sm-90vh {
+    height: 90vh !important;
+    overflow-y: scroll; /* Applied for screens >=768px */
+  }
+}
+
 .pane{
   height:50vh;
   padding-bottom: .5rem;
@@ -92,7 +102,7 @@ overflow-y-md-scroll {
 
 @media (min-width: 768px) {
   overflow-y-md-scroll {
-    overflow-y: scroll; /* Applied for screens >=768px */
+    overflow-y: scroll !important; /* Applied for screens >=768px */
   }
 }
 
@@ -103,4 +113,36 @@ overflow-y-md-scroll {
 
 .accordion-body{
   padding: 1px !important;
+}
+
+
+.brand-name {
+  font-size: 50px;
+  font-weight: 700;
+  background: linear-gradient(
+    to right,
+    #9068e8 20%,
+    #00affa 30%,
+    #01cd19 45%,
+    #eaff00 55%,
+    #ff0000 75%,
+    #ff0099 87%,
+    #4c00ff 95%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  background-size: 500% auto;
+  animation: textShine 8s linear infinite alternate;
+
+}
+
+@keyframes textShine {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }

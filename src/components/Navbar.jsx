@@ -6,6 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import 'bootstrap/dist/css/bootstrap.css';
 import Settingsbar from "./Settings";
 import { SettingsContext } from "./App";
+import '../App.css'
 
 function NavComponent() {
   const [isSettingsOpen, setSettingsOpen] = useState(false);
@@ -14,7 +15,7 @@ function NavComponent() {
   return (
     <>
     <Navbar expand="md" className="bg-body-tertiary" data-bs-theme="dark">
-      <Navbar.Brand >CodeWrite</Navbar.Brand>
+      <Navbar.Brand className="brand-name">CodeWrite</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Container className="ml-auto">
