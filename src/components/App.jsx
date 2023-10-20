@@ -2,15 +2,16 @@ import { useState, createContext} from 'react'
 import WebEditor from './Webeditor';
 import MarkdownEditor from './Mdeditor';
 import '../App.css'
+import useLocalStorage from '../hooks/localstorage';
 
 export const SettingsContext = createContext()
 
 export default function App() {
 
-    const [editor, setEditor] = useState("webeditor");
-    const [theme, setTheme] = useState("material");
-    const [tabornot, setTabornot] = useState(false);
-    const [autorun, setAutorun] = useState(true);
+    const [editor, setEditor] = useLocalStorage("editor","webeditor");
+    const [theme, setTheme] = useLocalStorage("theme","material");
+    const [tabornot, setTabornot] = useLocalStorage("tabornot",false);
+    const [autorun, setAutorun] = useLocalStorage("tabornot",true);
 
 
   return (
