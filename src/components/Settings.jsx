@@ -14,10 +14,10 @@ export default function Settingsbar(props) {
                 <Accordion.Body >
                     <Form className="d-md-flex justify-content-md-between">
                         {editor=="webeditor" && <><div className="p-1">
-                            <Form.Check type="switch" label="Run manually" onChange={() => setAutorun(!autorun)} />
+                            <Form.Check type="switch" label="Run manually" defaultChecked={!autorun} onChange={() => setAutorun(!autorun)} />
                         </div>
                         <div className="p-1">
-                            <Form.Check type="switch" label="Show as Tabs" onChange={() => setTabornot(!tabornot)} />
+                            <Form.Check type="switch" label="Show as Tabs" defaultChecked={tabornot} onChange={() => setTabornot(!tabornot)} />
                         </div></>
                         }
                         <div className="p-1">

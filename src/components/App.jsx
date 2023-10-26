@@ -11,7 +11,7 @@ export default function App() {
     const [editor, setEditor] = useLocalStorage("editor","webeditor");
     const [theme, setTheme] = useLocalStorage("theme","material");
     const [tabornot, setTabornot] = useLocalStorage("tabornot",false);
-    const [autorun, setAutorun] = useLocalStorage("tabornot",true);
+    const [autorun, setAutorun] = useLocalStorage("autorun",true);
 
 
   return (
