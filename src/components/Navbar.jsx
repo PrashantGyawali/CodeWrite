@@ -11,30 +11,31 @@ import '../App.css'
 function NavComponent() {
   const [isSettingsOpen, setSettingsOpen] = useState(false);
   const { editor, setEditor, theme, setTheme, tabornot, setTabornot, autorun, setAutorun } = useContext(SettingsContext);
+  const [navbarExpanded,setNavbarExpanded]=useState(true);
   
   return (
     <>
-    <Navbar expand="md" className="bg-body-tertiary" data-bs-theme="dark">
+    <Navbar expand="md" className="bg-body-tertiary" data-bs-theme="dark" expanded={navbarExpanded} onToggle={()=>{setNavbarExpanded(!navbarExpanded); setSettingsOpen(false)}}>
       <Navbar.Brand className="brand-name">CodeWrite</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Container className="ml-auto">
-          <Nav variant="tabs" defaultActiveKey={editor=="webeditor"?"link-1":"link-2"} data-bs-theme="dark">
-            <Container className="d-md-flex">
+      <Navbar.Collapse id="basic-navbar-nav"  >
+        <div className="ms-0  justify-content-start w-100">
+          <Nav variant="tabs" defaultActiveKey={editor=="webeditor"?"link-1":"link-2"} data-bs-theme="dark" className="ms-0">
+            <div className="d-md-flex ms-0">
               <Nav.Item>
-                <Nav.Link eventKey="link-1" onClick={()=>setEditor('webeditor')}>Web Editor</Nav.Link>
+                <Nav.Link eventKey="link-1" onClick={()=>setEditor('webeditor')}> <span className="ps-3 pe-3"> Web Editor</span></Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="link-2" onClick={()=>setEditor('markdown')}>Markdown editor</Nav.Link>
+                <Nav.Link eventKey="link-2" onClick={()=>setEditor('markdown')} className="ps-3 pe-3">Markdown editor</Nav.Link>
               </Nav.Item>
-            </Container>
-            <Nav.Item className="ml-auto">
-              <Button variant="dark" className="text-light" data-bs-theme="dark" onClick={() => setSettingsOpen(!isSettingsOpen)}>
+            </div>
+            <Nav.Item className="ms-0 ms-md-auto ">
+              <Button variant="dark" className="text-light " data-bs-theme="dark" onClick={() => setSettingsOpen(!isSettingsOpen)}>
               &#9881;
               </Button>
             </Nav.Item>
           </Nav>
-        </Container>
+        </div>
       </Navbar.Collapse>
     </Navbar>
     <Settingsbar isSettingsOpen={isSettingsOpen}/>
