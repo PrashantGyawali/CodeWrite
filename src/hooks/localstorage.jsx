@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react";
 
-const PREFIX="codepen-"
+const PREFIX="codewrite-"
 
 export default function useLocalStorage(key,initialValue)
 {
