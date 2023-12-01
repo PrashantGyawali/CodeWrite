@@ -6,7 +6,16 @@ import { SettingsContext } from "./App";
 
 export default function Settingsbar(props) {
 
-    const { editor, setEditor, theme, setTheme, tabornot, setTabornot, autorun, setAutorun } = useContext(SettingsContext)
+    const { editor, setEditor, theme, setTheme, tabornot, setTabornot, autorun, setAutorun } = useContext(SettingsContext);
+
+    const themeMapping={
+        "material":"Material Theme",
+        "cobalt":"Cobalt theme",
+        "xq-dark":"XQ-dark",
+        "the-matrix":"Matrix",
+        "night":"Night",
+        "3024-day":"Light"
+    }
 
     return (
         <Accordion activeKey={props.isSettingsOpen ? "0" : null} data-bs-theme="dark" variant="dark" flush>
@@ -23,13 +32,15 @@ export default function Settingsbar(props) {
                         <div className="p-1">
                             <Dropdown>
                                 <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                                    Choose a theme:
+                                    Theme: {themeMapping[theme]}
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
                                     <Dropdown.Item onClick={() => setTheme("material")}>Material Theme</Dropdown.Item>
                                     <Dropdown.Item onClick={() => setTheme("cobalt")}>Cobalt theme</Dropdown.Item>
                                     <Dropdown.Item onClick={() => setTheme("xq-dark")}>XQ-dark</Dropdown.Item>
                                     <Dropdown.Item onClick={() => setTheme("the-matrix")}>Matrix</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setTheme("night")}>Night</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => setTheme("3024-day")}>Light</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         </div>
