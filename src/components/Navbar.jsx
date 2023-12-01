@@ -10,7 +10,7 @@ import '../App.css'
 function NavComponent() {
   const [isSettingsOpen, setSettingsOpen] = useState(false);
   const { editor, setEditor, theme, setTheme, tabornot, setTabornot, autorun, setAutorun } = useContext(SettingsContext);
-  const [navbarExpanded, setNavbarExpanded] = useState(true);
+  const [navbarExpanded, setNavbarExpanded] = useState(false);
 
   return (
     <>
