@@ -10,7 +10,6 @@ import Nav from 'react-bootstrap/Nav';
 
 
 
-
 export default function WebEditor() {
   const [html, setHTML] = useLocalStorage('html',"");
   const [css, setCss] = useLocalStorage('css',"");
@@ -23,18 +22,16 @@ export default function WebEditor() {
 
   useEffect(()=> {
     if(autorun)
-{
-    const timeout= setTimeout(() => {
-    setSrcDoc(`<html><style>${css}</style><body>${html}</body><script>${js}</script></html>`)
-  }, 750);
+    {
+      const timeout= setTimeout(() => {
+      setSrcDoc(`<html><style>${css}</style><body>${html}</body><script>${js}</script></html>`)
+    }, 750);
 
-  return ()=> clearTimeout(timeout);
-}
+    return ()=> clearTimeout(timeout);
+  }
 },[html,css,js]);
 
 const runbtnstyle={position:'absolute',right:0,top:0, fontSize:'16px'};
-
-
 
 
   return (
@@ -91,7 +88,15 @@ const runbtnstyle={position:'absolute',right:0,top:0, fontSize:'16px'};
           width='100%'
           height="100%"
           ></iframe>
-          {!autorun && <button onClick={()=>setSrcDoc(`<html><style>${css}</style><body>${html}</body><script>${js}</script></html>`)} style={runbtnstyle}> Run</button>}
+          {!autorun && <button onClick={
+          ()=>setSrcDoc(`
+                        <html>
+                        <style>${css}</style>
+                        <body>${html}</body>
+                        <script>
+                        ${js}
+                        </script></html>`
+                      )} style={runbtnstyle}>Run</button>}
       </div>
     </>
   )

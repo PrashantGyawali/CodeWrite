@@ -42,7 +42,7 @@ export default function Editor(props)
 
     //sets the min no of lines (useful for mobiles)
     useEffect(() => {
-      let expectedLineCount=Math.max(Math.floor(editorRef.current.editor.display.lastWrapHeight/24)-1,5);
+      let expectedLineCount=Math.min(Math.max(Math.floor(editorRef.current.editor.display.lastWrapHeight/24)-1,5),15);
       let lineCount = value.split(`\n`).length;
       if (lineCount < expectedLineCount) {
         let newValue = value;
