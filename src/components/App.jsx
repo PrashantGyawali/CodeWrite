@@ -12,11 +12,12 @@ export default function App() {
     const [theme, setTheme] = useLocalStorage("theme","material");
     const [tabornot, setTabornot] = useLocalStorage("tabornot",false);
     const [autorun, setAutorun] = useLocalStorage("autorun",true);
+    const [autoCloseTags, setAutoCloseTags] = useLocalStorage("autoclosetags",true);
 
 
   return (
     <>
-    <SettingsContext.Provider value={{editor,setEditor,theme,setTheme,tabornot,setTabornot,autorun,setAutorun}}>
+    <SettingsContext.Provider value={{editor,setEditor,theme,setTheme,tabornot,setTabornot,autorun,setAutorun,autoCloseTags,setAutoCloseTags}}>
         {editor=='webeditor' && <WebEditor/>}
         {editor=='markdown' && <MarkdownEditor/>}
     </SettingsContext.Provider>

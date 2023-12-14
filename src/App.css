@@ -145,3 +145,7 @@ overflow-y-md-scroll {
     background-position: 100% 50%;
   }
 }
+
+.pl-10{
+  padding-left: 10px !important;
+}

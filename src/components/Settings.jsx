@@ -6,7 +6,7 @@ import { SettingsContext } from "./App";
 
 export default function Settingsbar(props) {
 
-    const { editor, setEditor, theme, setTheme, tabornot, setTabornot, autorun, setAutorun } = useContext(SettingsContext);
+    const { editor, setEditor, theme, setTheme, tabornot, setTabornot, autorun, setAutorun, autoCloseTags,setAutoCloseTags  } = useContext(SettingsContext);
 
     const themeMapping={
         "material":"Material Theme",
@@ -21,13 +21,17 @@ export default function Settingsbar(props) {
         <Accordion activeKey={props.isSettingsOpen ? "0" : null} data-bs-theme="dark" variant="dark" flush>
             <Accordion.Item eventKey="0">
                 <Accordion.Body >
-                    <Form className="d-md-flex justify-content-md-between">
+                    <Form className="d-md-flex justify-content-md-between align-items-center">
                         {editor=="webeditor" && <><div className="p-1">
                             <Form.Check type="switch" label="Run manually" defaultChecked={!autorun} onChange={() => setAutorun(!autorun)} />
                         </div>
                         <div className="p-1">
                             <Form.Check type="switch" label="Show as Tabs" defaultChecked={tabornot} onChange={() => setTabornot(!tabornot)} />
-                        </div></>
+                        </div>
+                        <div className="p-1">
+                            <Form.Check type="switch" label="Autoclose tags" defaultChecked={autoCloseTags} onChange={() => setAutoCloseTags(!autoCloseTags)} />
+                        </div>
+                        </>
                         }
                         <div className="p-1">
                             <Dropdown>

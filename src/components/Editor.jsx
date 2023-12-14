@@ -12,6 +12,11 @@ import 'codemirror/mode/css/css'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/mode/markdown/markdown'
 
+import 'codemirror/addon/edit/closebrackets'
+import 'codemirror/addon/edit/closetag'
+import 'codemirror/addon/lint/lint'
+import 'codemirror/addon/display/autorefresh'
+
 
 import "../App.css"
 
@@ -24,7 +29,7 @@ export default function Editor(props)
 
     const [open,setOpen]=useState(true);
 
-    const { editor, setEditor, theme, setTheme, tabornot, setTabornot, autorun, setAutorun } = useContext(SettingsContext)
+    const {editor,theme,tabornot,autoCloseTags} = useContext(SettingsContext)
     
     const editorRef=useRef(0);
 
@@ -67,6 +72,9 @@ export default function Editor(props)
             lineNumbers:true,
             mode:language,
             theme:theme,
+            autoCloseBrackets: autoCloseTags,
+            autoCloseTags: autoCloseTags,
+            matchBrackets: true,
         }}
         ref={editorRef}
         />

@@ -7,9 +7,11 @@ import '../App.css'
 import useLocalStorage from '../hooks/localstorage';
 
 function MarkdownOutput(props){
-    return  (<div className='text-light'>
+    return  (<div className='text-light '>
         <div className="editor-title css">Output</div>
+                <div className='pl-10'>
                 <Markdown remarkPlugins={[remarkGfm]}>{props.markdown}</Markdown>
+                </div>
             </div>)
 }
 
@@ -20,7 +22,6 @@ export default function MarkdownEditor(){
         <>
         <NavComponent/>
         <div className="d-sm-flex " >
-
             <div className="editor-container h-90vh">
             <Editor language="markdown" displayname="Markdown" value={markdown} onChange={setMarkdown} />
             </div>

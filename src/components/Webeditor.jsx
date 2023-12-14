@@ -17,8 +17,13 @@ export default function WebEditor() {
   const [srcDoc,setSrcDoc]=useState('');
   const [tabstate,setTabstate]=useState(1);
 
-  const { editor, setEditor, theme, setTheme, tabornot, setTabornot, autorun, setAutorun } = useContext(SettingsContext)
+  const {tabornot, autorun} = useContext(SettingsContext)
 
+
+  useEffect(()=> {
+      setSrcDoc(`<html><style>${css}</style><body>${html}</body><script>${js}</script></html>`)
+    }
+,[]);
 
   useEffect(()=> {
     if(autorun)
