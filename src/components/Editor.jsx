@@ -27,7 +27,6 @@ import { SettingsContext } from "./App";
 export default function Editor(props)
 {
 
-    const [open,setOpen]=useState(true);
 
     const {editor,theme,tabornot,autoCloseTags} = useContext(SettingsContext)
     
@@ -37,7 +36,9 @@ export default function Editor(props)
         language,
         displayname,
         value,
-        onChange
+        onChange,
+        minimized,
+        handleMinimize
     }=props;
 
     function handleChange(editor,data,value)
@@ -60,10 +61,10 @@ export default function Editor(props)
 
 
     return (
-        <div className={`editor-container ${open?'':'collapsed'}`}>
+        <div className={`editor-container ${minimized?"collapsed":''}`}>
         <div className={`editor-title ${language}`}>
             <div>{displayname}</div>
-            {!tabornot && editor!='markdown' && <button onClick={()=>setOpen(prevOpen=>!prevOpen)}>{open?"><":"<>"}</button> }
+            {!tabornot && editor!='markdown' && <button onClick={handleMinimize}>{!minimized?"><":"<>"}</button> }
         </div>
         
         <ControlledEditor onBeforeChange={handleChange} value={value} className="code-mirror-wrapper" options={{
