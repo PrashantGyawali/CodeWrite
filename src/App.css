@@ -149,3 +149,9 @@ overflow-y-md-scroll {
 .pl-10{
   padding-left: 10px !important;
 }
+
+.md-output-title{
+  padding:10px;
+  font-size: 18px;
+  margin-top: 5px;
+}

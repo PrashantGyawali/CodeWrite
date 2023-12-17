@@ -16,13 +16,16 @@ import 'codemirror/addon/edit/closebrackets'
 import 'codemirror/addon/edit/closetag'
 import 'codemirror/addon/lint/lint'
 import 'codemirror/addon/display/autorefresh'
-
+import 'codemirror/addon/edit/matchbrackets'
 
 import "../App.css"
+import Downloadbtn from "./Downloadbtn";
+import minimize from "../assets/minimize.svg";
+import maximize from "../assets/maximize.svg";
 
 import { Controlled as ControlledEditor } from "react-codemirror2";
 import { SettingsContext } from "./App";
-
+import { sanitizeHTML } from "../utils/functions.js";
 
 export default function Editor(props)
 {
@@ -46,6 +49,7 @@ export default function Editor(props)
         onChange(value);
     }
 
+
     //sets the min no of lines (useful for mobiles)
     useEffect(() => {
       let expectedLineCount=Math.min(Math.max(Math.floor(editorRef.current.editor.display.lastWrapHeight/24)-1,5),15);
@@ -59,17 +63,40 @@ export default function Editor(props)
       }
     }, []);
 
+    const contentTypes={
+      "xml":{type:"text/xml",name:"index.html"},
+      "css":{type:"text/css", name:"style.css"},
+      "javascript":{type:"text/javascript",name:"script.js"},
+      "markdown":{type:"text/markdown",name:"markdown.md"}
+    }
+    const download=()=>{
+      const link = document.createElement('a');
+      let downloadableValue=value;
+      if(language==="xml"){
+        downloadableValue=sanitizeHTML(value);
+      } 
+      const content=new Blob([downloadableValue],{type:`${contentTypes[language].type};charset=utf-8`});
+      link.href=URL.createObjectURL(content);
+      link.download=contentTypes[language].name;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    }
 
     return (
         <div className={`editor-container ${minimized?"collapsed":''}`}>
         <div className={`editor-title ${language}`}>
             <div>{displayname}</div>
-            {!tabornot && editor!='markdown' && <button onClick={handleMinimize}>{!minimized?"><":"<>"}</button> }
+            <div style={{display:'flex',flexDirection:"row", marginLeft:"5px"}}>  
+              <Downloadbtn onClickfn={download}/>     
+              {!tabornot && editor!='markdown' && <button onClick={handleMinimize}><img src={minimized?maximize:minimize} alt={!minimized?"><":"<>"} /> </button> }
+            </div>
+            
         </div>
         
         <ControlledEditor onBeforeChange={handleChange} value={value} className="code-mirror-wrapper" options={{
             lineWrapping:true,
             lint:true,
+            inputStyle:"textarea",
             lineNumbers:true,
             mode:language,
             theme:theme,

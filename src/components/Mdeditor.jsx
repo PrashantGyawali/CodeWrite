@@ -8,7 +8,7 @@ import useLocalStorage from '../hooks/localstorage';
 
 function MarkdownOutput(props){
     return  (<div className='text-light '>
-        <div className="editor-title css">Output</div>
+        <div className="editor-title css md-output-title">Output</div>
                 <div className='pl-10'>
                 <Markdown remarkPlugins={[remarkGfm]}>{props.markdown}</Markdown>
                 </div>
