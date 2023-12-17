@@ -17,6 +17,7 @@ Welcome to **CodeWrite**, our web-based HTML, CSS, JavaScript and Markdown edito
 - **Syntax Highlighting**: Code is highlighted for better readability.
 - **Dark Mode**: Enjoy coding in low-light environments.
 - **Multiple Themes**: Customize themes according to your liking.
+-  **Download** : Download code on your local computer.
 ![CodeWrite WebSettings](./public/websettings.png)
 
 ## How to Use
@@ -24,6 +25,7 @@ Welcome to **CodeWrite**, our web-based HTML, CSS, JavaScript and Markdown edito
 1. **Edit**: Modify the code in the editor for HTML, CSS, and JavaScript.
 2. **Preview**: See your changes in real-time in the preview window.
 3. **Save**: Auto-save your project in localStorage for later use.
+4. **Download**: Download your files on computer to test or edit locally.
 
 ## Star and Contribute
 
