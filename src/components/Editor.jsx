@@ -26,10 +26,10 @@ import maximize from "../assets/maximize.svg";
 import { Controlled as ControlledEditor } from "react-codemirror2";
 import { SettingsContext } from "./App";
 import { sanitizeHTML } from "../utils/functions.js";
+import DownloadAll from "./DownloadAll.jsx";
 
 export default function Editor(props)
 {
-
 
     const {editor,theme,tabornot,autoCloseTags} = useContext(SettingsContext)
     
@@ -41,7 +41,8 @@ export default function Editor(props)
         value,
         onChange,
         minimized,
-        handleMinimize
+        handleMinimize,
+        handleDownloadAllClick
     }=props;
 
     function handleChange(editor,data,value)
@@ -87,7 +88,8 @@ export default function Editor(props)
         <div className={`editor-title ${language}`}>
             <div>{displayname}</div>
             <div style={{display:'flex',flexDirection:"row", marginLeft:"5px"}}>  
-              <Downloadbtn onClickfn={download}/>     
+              {language=="xml" && <DownloadAll onClickfn={handleDownloadAllClick} title={"Combine into Single HTML"}/>  }
+              <Downloadbtn onClickfn={download} title={"Download "+contentTypes[language].name}/> 
               {!tabornot && editor!='markdown' && <button onClick={handleMinimize}><img src={minimized?maximize:minimize} alt={!minimized?"><":"<>"} /> </button> }
             </div>
             

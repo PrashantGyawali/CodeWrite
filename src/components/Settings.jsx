@@ -1,8 +1,7 @@
-import { Accordion, Form, Dropdown } from "react-bootstrap";
+import { Accordion, Form, Dropdown} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.css';
 import { useContext } from "react";
 import { SettingsContext } from "./App";
-
 
 export default function Settingsbar(props) {
 
@@ -22,7 +21,8 @@ export default function Settingsbar(props) {
             <Accordion.Item eventKey="0">
                 <Accordion.Body >
                     <Form className="d-md-flex justify-content-md-between align-items-center">
-                        {editor=="webeditor" && <><div className="p-1">
+                        {editor=="webeditor" && <>
+                        <div className="p-1">
                             <Form.Check type="switch" label="Run manually" defaultChecked={!autorun} onChange={() => setAutorun(!autorun)} />
                         </div>
                         <div className="p-1">

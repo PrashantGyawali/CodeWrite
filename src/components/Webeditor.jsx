@@ -4,16 +4,25 @@ import "../App.css";
 import useLocalStorage from "../hooks/localstorage";
 import NavComponent from "./Navbar";
 import { SettingsContext } from "./App";
+import { combineIntoHTML } from "../utils/functions";
+
+import runbtn from "../assets/run.svg";
 
 import Nav from "react-bootstrap/Nav";
 
 export default function WebEditor() {
+  //for storage
   const [html, setHTML] = useLocalStorage("html", "");
   const [css, setCss] = useLocalStorage("css", "");
   const [js, setJs] = useLocalStorage("js", "");
+
+  //for iframe
   const [srcDoc, setSrcDoc] = useState("");
+
+  // handling tabs if user has enabled show as tabs
   const [tabstate, setTabstate] = useState(1);
 
+  //for minimizing if not tabs
   const [htmlMinimize, setHtmlMinimize] = useState(false);
   const [cssMinimize, setCssMinimize] = useState(false);
   const [jsMinimize, setJsMinimize] = useState(false);
@@ -42,6 +51,7 @@ export default function WebEditor() {
     handleMinimize(setJsMinimize, jsMinimize);
   };
 
+//for tab or not nd run btn
   const { tabornot, autorun } = useContext(SettingsContext);
 
   useEffect(() => {
@@ -56,18 +66,24 @@ export default function WebEditor() {
         setSrcDoc(
           `<html><style>${css}</style><body>${html}</body><script>${js}</script></html>`
         );
-      }, 750);
+      }, 1000);
 
       return () => clearTimeout(timeout);
     }
   }, [html, css, js]);
 
-  const runbtnstyle = {
-    position: "absolute",
-    right: 0,
-    top: 0,
-    fontSize: "16px",
-  };
+
+
+  const handleDownloadAllClick = () => {
+    const link = document.createElement('a');
+    let  downloadableValue=combineIntoHTML(html,css,js);
+    console.log(downloadableValue);
+    const content=new Blob([downloadableValue],{type:`text/xml`,name:"index.html"});
+    link.href=URL.createObjectURL(content);
+    link.download="index.html";
+    link.click();
+    URL.revokeObjectURL(link.href);
+  }
 
   return (
     <>
@@ -83,6 +99,7 @@ export default function WebEditor() {
               onChange={setHTML}
               minimized={htmlMinimize}
               handleMinimize={handleHtmlMinimize}
+              handleDownloadAllClick={handleDownloadAllClick}
             />
             <Editor
               language="css"
@@ -143,6 +160,7 @@ export default function WebEditor() {
                 displayname="HTML"
                 value={html}
                 onChange={setHTML}
+                handleDownloadAllClick={handleDownloadAllClick}
               />
             </div>
           )}
@@ -188,9 +206,9 @@ export default function WebEditor() {
                         ${js}
                         </script></html>`)
             }
-            style={runbtnstyle}
+            className="run-button"
           >
-            Run
+            <img src={runbtn} alt="" srcset="" />
           </button>
         )}
       </div>
