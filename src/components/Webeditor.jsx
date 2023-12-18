@@ -73,7 +73,7 @@ export default function WebEditor() {
   }, [html, css, js]);
 
 
-
+// handle download all
   const handleDownloadAllClick = () => {
     const link = document.createElement('a');
     let  downloadableValue=combineIntoHTML(html,css,js);
@@ -208,7 +208,7 @@ export default function WebEditor() {
             }
             className="run-button"
           >
-            <img src={runbtn} alt="" srcset="" />
+            <img src={runbtn} alt="" />
           </button>
         )}
       </div>

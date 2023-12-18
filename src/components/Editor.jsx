@@ -25,7 +25,7 @@ import maximize from "../assets/maximize.svg";
 
 import { Controlled as ControlledEditor } from "react-codemirror2";
 import { SettingsContext } from "./App";
-import { sanitizeHTML } from "../utils/functions.js";
+import { sanitizeHTML, isEmptyExcluding,replaceSubstring } from "../utils/functions.js";
 import DownloadAll from "./DownloadAll.jsx";
 
 export default function Editor(props)
@@ -64,12 +64,40 @@ export default function Editor(props)
       }
     }, []);
 
+
+//placeholder for empty editor and remove placeholder when not empty
+    useEffect(() => {        
+        let is_empty = isEmptyExcluding(value, ["\n", " "]);
+        if(is_empty)
+        {
+          let expectedLineCount=Math.min(Math.max(Math.floor(editorRef.current.editor.display.lastWrapHeight/24)-1,5),15);
+
+            let newValue = contentTypes[language].placeholder;
+            for (let i = 0; i < expectedLineCount; i++) {
+              newValue += "\n";
+            }
+            onChange(newValue);
+        }
+        else{
+          let isNotEmpty = !isEmptyExcluding(value, [contentTypes[language].placeholder, "\n", ""]);
+          
+          if(isNotEmpty)
+          {
+            let newValue=replaceSubstring(value, contentTypes[language].placeholder, "");
+            onChange(newValue);
+          }
+        }
+        },[value]);
+
+//for handling download all and others
     const contentTypes={
-      "xml":{type:"text/xml",name:"index.html"},
-      "css":{type:"text/css", name:"style.css"},
-      "javascript":{type:"text/javascript",name:"script.js"},
-      "markdown":{type:"text/markdown",name:"markdown.md"}
+      "xml":{type:"text/xml",name:"index.html",placeholder:"<!-- Drag and drop your HTML file here or start writing -->"},
+      "css":{type:"text/css", name:"style.css", placeholder:"/* Drag and drop your CSS file here or start writing */"},
+      "javascript":{type:"text/javascript",name:"script.js",placeholder:"// Drag and drop your JS file here or start writing"},
+      "markdown":{type:"text/markdown",name:"markdown.md", placeholder:" Drag and drop your Markdown file here or start writing"}
     }
+
+
     const download=()=>{
       const link = document.createElement('a');
       let downloadableValue=value;
@@ -104,9 +132,10 @@ export default function Editor(props)
             theme:theme,
             autoCloseBrackets: autoCloseTags,
             autoCloseTags: autoCloseTags,
-            matchBrackets: true,
+            matchBrackets: true, 
+            undoDepth: 400,     
         }}
-        ref={editorRef}
+        ref={editorRef} 
         />
     </div>
     );

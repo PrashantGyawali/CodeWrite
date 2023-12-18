@@ -56,3 +56,27 @@ export function sanitizeHTML(string) {
     return sanitizedHTML;
 
   }
+
+  export function isEmptyExcluding(str, [...excluding]) {
+    console.log(excluding);
+    if (excluding.length > 0) {
+      excluding.forEach((exclusion) => {
+        // Escape special characters in the exclusion string
+        const escapedExclusion = exclusion.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+        
+        // Create a RegExp with the escaped exclusion string
+        let regex = new RegExp(escapedExclusion, 'g');
+        
+        // Replace occurrences of the exclusion in the string
+        str = str.replace(regex, '');
+        });
+    }    
+    // Remove extra spaces and newlines and check if the string is empty
+    return (str.trim().replace(/\n/g, '').trim()).length < 1;
+  }
+  
+
+  export function replaceSubstring(str,substr,replacement)
+  {
+    return str.replace(substr,replacement);
+  }
