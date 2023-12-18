@@ -58,7 +58,6 @@ export function sanitizeHTML(string) {
   }
 
   export function isEmptyExcluding(str, [...excluding]) {
-    console.log(excluding);
     if (excluding.length > 0) {
       excluding.forEach((exclusion) => {
         // Escape special characters in the exclusion string

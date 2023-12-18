@@ -47,7 +47,28 @@ export default function Editor(props)
 
     function handleChange(editor,data,value)
     {
-        onChange(value);
+      let is_empty = isEmptyExcluding(value, ["\n", " "]);
+      if(is_empty)
+      {
+        let expectedLineCount=Math.min(Math.max(Math.floor(editorRef.current.editor.display.lastWrapHeight/24)-1,5),15);
+
+          let newValue = contentTypes[language].placeholder;
+          for (let i = 0; i < expectedLineCount; i++) {
+            newValue += "\n";
+          }
+          onChange(newValue);
+      }
+      else{
+        let isNotEmpty = !isEmptyExcluding(value, [contentTypes[language].placeholder, "\n", ""]);
+        if(isNotEmpty)
+        {
+          let newValue=replaceSubstring(value, contentTypes[language].placeholder, "");
+          onChange(newValue);
+        }
+        else{
+          onChange(value);
+        }
+      }
     }
 
 
@@ -67,26 +88,7 @@ export default function Editor(props)
 
 //placeholder for empty editor and remove placeholder when not empty
     useEffect(() => {        
-        let is_empty = isEmptyExcluding(value, ["\n", " "]);
-        if(is_empty)
-        {
-          let expectedLineCount=Math.min(Math.max(Math.floor(editorRef.current.editor.display.lastWrapHeight/24)-1,5),15);
-
-            let newValue = contentTypes[language].placeholder;
-            for (let i = 0; i < expectedLineCount; i++) {
-              newValue += "\n";
-            }
-            onChange(newValue);
-        }
-        else{
-          let isNotEmpty = !isEmptyExcluding(value, [contentTypes[language].placeholder, "\n", ""]);
-          
-          if(isNotEmpty)
-          {
-            let newValue=replaceSubstring(value, contentTypes[language].placeholder, "");
-            onChange(newValue);
-          }
-        }
+       
         },[value]);
 
 //for handling download all and others
