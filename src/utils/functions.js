@@ -74,8 +74,3 @@ export function sanitizeHTML(string) {
     return (str.trim().replace(/\n/g, '').trim()).length < 1;
   }
   
-
-  export function replaceSubstring(str,substr,replacement)
-  {
-    return str.replace(substr,replacement);
-  }
