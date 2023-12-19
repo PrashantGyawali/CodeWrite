@@ -27,6 +27,14 @@ Welcome to **CodeWrite**, our web-based HTML, CSS, JavaScript and Markdown edito
 3. **Save**: Auto-save your project in localStorage for later use.
 4. **Download**: Download your files on computer to test or edit locally.
 
+## Roadmap
+
+- **PWA**: Make the core functionality work offline
+- **Backend**: Save code on database
+- **Sharing**: Share your code to others to see or fork as link
+- **Deployment**: Live preview your website on the server
+- **Collaborative** code editing using websockets
+
 ## Star and Contribute
 
 If you find our web editor useful, consider starring the project on GitHub to show your support. You're also welcome to contribute to the development of this open-source project by submitting issues, feature requests, or pull requests. Your contributions help us make CodeWrite better for everyone.
