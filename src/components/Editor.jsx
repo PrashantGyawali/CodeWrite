@@ -111,6 +111,7 @@ export default function Editor(props)
       link.download=contentTypes[language].name;
       link.click();
       URL.revokeObjectURL(link.href);
+      link.remove();
     }
 
     return (

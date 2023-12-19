@@ -83,6 +83,7 @@ export default function WebEditor() {
     link.download="index.html";
     link.click();
     URL.revokeObjectURL(link.href);
+    link.remove();
   }
 
   return (
