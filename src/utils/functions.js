@@ -33,8 +33,8 @@ export function sanitizeHTML(string) {
     js=js.trim();
     css=css.trim();
     string=string.trim();
+
     const body = bodyMatch ? `<body>${bodyMatch[1]} <script>${js}</script></body>` : `<body>${string}<script>${js}</script></body>`;
-    
     const titleregex = /<title>(.*?)<\/title>/;
     const match = string.match(titleregex);
     const title = match ? `<title>${match[1]}</title>` : `<title>Document</title>`;
@@ -48,14 +48,24 @@ export function sanitizeHTML(string) {
 
     const htmlRegex = /<html>([\s\S]*?)<\/html>/;
     const htmlMatch = string.match(htmlRegex);
+    if(htmlMatch)
+    {
+      if(headMatch)
+      {
+        htmlMatch[0]="<html>"+htmlMatch[1].replace(headRegex,head).replace(bodyRegex,body)+"</html>";
+      }
+      else{
+        htmlMatch[0]="<html>"+head+htmlMatch[1].replace(bodyRegex,body)+"</html>";
+      }
+    }
     const sanitizedHTML = htmlMatch ? htmlMatch[0] : `<html>
     ${head}
     ${body}
     </html>`;
 
     return sanitizedHTML;
-
   }
+
 
   export function isEmptyExcluding(str, [...excluding]) {
     if (excluding.length > 0) {
