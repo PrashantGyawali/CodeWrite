@@ -1,4 +1,3 @@
-import React from 'react'
 import downloadIcon from '../assets/downloadIcon.svg'
 
 export default function Downloadbtn({onClickfn,title}) {
