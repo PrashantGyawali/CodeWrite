@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.1",
   "type": "module",
-  "homepage": "https://PrashantGyawali.github.io/CodeWrite/",
+  "homepage": "./",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
